@@ -1,0 +1,12 @@
+services:
+  spaniej:
+    container_name: spaniej
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+
+networks:
+  default:
+    external: true
+    name: krokosik-web-services
