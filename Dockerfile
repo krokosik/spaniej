@@ -25,7 +25,10 @@ COPY --from=builder ${VIRTUAL_ENV} ${VIRTUAL_ENV}
 
 COPY spaniej ./spaniej
 
-CMD ["panel", "serve", "/app/spaniej/__init__.py", "--allow-websocket-origin", "*", "--num-procs", "2"]
+ARG COOKIE_SECRET
+
+CMD ["panel", "serve", "/app/spaniej/__init__.py", "--allow-websocket-origin", "*", "--basic-auth", "/app/data/credentials.json", "--cookie-secret", "${COOKIE_SECRET}"]
 
 RUN mkdir .cache
 RUN chmod 777 .cache
+RUN chmod 777 .

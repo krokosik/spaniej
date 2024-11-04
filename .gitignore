@@ -1,2 +1,2 @@
-db.sqlite
-store.h5
+data
+.env

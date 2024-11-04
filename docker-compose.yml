@@ -4,7 +4,13 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        COOKIE_SECRET: ${COOKIE_SECRET}
     restart: unless-stopped
+    volumes:
+      - ./data:/app/data
+    env_file:
+      - .env
 
 networks:
   default:
