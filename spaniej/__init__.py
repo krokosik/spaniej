@@ -7,7 +7,7 @@ import functools
 
 # %%
 pn.extension(theme="dark", sizing_mode="stretch_width")
-store = pd.HDFStore("store.h5")
+store = pd.HDFStore("data/store.h5")
 
 PARAMS = {
     "Czas snu": dict(
@@ -32,9 +32,9 @@ PARAMS = {
 def empty_df() -> pd.DataFrame:
     return pd.DataFrame(
         {
-            "Czas snu": pd.Series([], dtype="int"),
-            "Stan fizyczny": pd.Series([], dtype="int"),
-            "Stan psychiczny": pd.Series([], dtype="int"),
+            "Czas snu": pd.Series([], dtype="float"),
+            "Stan fizyczny": pd.Series([], dtype="float"),
+            "Stan psychiczny": pd.Series([], dtype="float"),
             "Komentarz": pd.Series([], dtype="str"),
         },
         index=pd.Series([], dtype="datetime64[s]"),
@@ -91,18 +91,20 @@ sleep_hours_slider = pn.widgets.FloatSlider(
     value=7,
     bar_color=PARAMS["Czas snu"]["plot_args"]["color"],
 )
-physical_score_slider = pn.widgets.IntSlider(
+physical_score_slider = pn.widgets.FloatSlider(
     name="Stan fizyczny",
     start=0,
     end=10,
     value=5,
+    step=0.5,
     bar_color=PARAMS["Stan fizyczny"]["plot_args"]["color"],
 )
-mental_score_slider = pn.widgets.IntSlider(
+mental_score_slider = pn.widgets.FloatSlider(
     name="Stan psychiczny",
     start=0,
     end=10,
     value=5,
+    step=0.5,
     bar_color=PARAMS["Stan psychiczny"]["plot_args"]["color"],
 )
 comment_input = pn.widgets.TextAreaInput(
